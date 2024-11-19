@@ -25,7 +25,7 @@ app.use('/user' , user)
 app.use(cors({
     origin: [
         'http://localhost:5173', 
-        'https://tattoo-mee-web-app.vercel.app/'
+        'https://tattoo-mee-web-app.vercel.app'
     ],
     credentials: true
 }));
