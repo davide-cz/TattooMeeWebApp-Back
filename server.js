@@ -27,7 +27,9 @@ app.use(cors({
         'http://localhost:5173', 
         'https://tattoo-mee-web-app.vercel.app'
     ],
-    credentials: true
+    credentials: true,
+    
+    methods: ["GET", "POST", "PUT", "DELETE"]
 }));
 
 mongoose.connect(MONGO_URI)
