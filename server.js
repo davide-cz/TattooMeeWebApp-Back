@@ -19,8 +19,6 @@ app.use(express.json());
 
 // ------------- -rotte -------------
 
-app.use('/booking' , bookingRoute)
-app.use('/user' , user)
 
 app.use(cors({
     origin: [
@@ -35,6 +33,10 @@ app.use(cors({
 mongoose.connect(MONGO_URI)
 .then(console.log('connesso a mongoDB'))
 .catch(error=>console.error(error))
+
+
+app.use('/booking' , bookingRoute)
+app.use('/user' , user)
 
 app.listen(PORT, ()=>{
     console.log('in ascolto su porta 3000')
