@@ -22,6 +22,14 @@ app.use(express.json());
 app.use('/booking' , bookingRoute)
 app.use('/user' , user)
 
+app.use(cors({
+    origin: [
+        'http://localhost:5173', 
+        'https://tattoo-mee-web-app.vercel.app/'
+    ],
+    credentials: true
+}));
+
 mongoose.connect(MONGO_URI)
 .then(console.log('connesso a mongoDB'))
 .catch(error=>console.error(error))
