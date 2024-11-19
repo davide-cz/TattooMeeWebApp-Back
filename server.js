@@ -14,7 +14,6 @@ const {MONGO_URI}=process.env;
 const app= express() ;
 
 app.use(morgan('dev'));
-app.use( cors() );
 app.use(express.json());
 
 // ------------- -rotte -------------
