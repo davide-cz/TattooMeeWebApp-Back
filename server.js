@@ -20,8 +20,9 @@ app.use(express.json());
 
 
 app.use(cors({
-    origin: 
+    origin: [
         'https://tattoo-mee-web-app.vercel.app',
+        'http://localhost:5173/'],
     
     credentials: true,
     
