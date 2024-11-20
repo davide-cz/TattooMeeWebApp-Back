@@ -13,25 +13,23 @@ const {MONGO_URI}=process.env;
 
 const app= express() ;
 
+app.use(cors({
+    origin: ['http://localhost:5173', 'https://tattoo-mee-web-app.vercel.app'], // Consenti il frontend locale e deployato
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Metodi HTTP consentiti
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(morgan('dev'));
 app.use(express.json());
+
 
 // ------------- -rotte -------------
 
 
-app.use(cors({
-    origin: [
-        'https://tattoo-mee-web-app.vercel.app',
-        'http://localhost:5173/'],
-    
-    credentials: true,
-    
-    methods: ["GET", "POST", "PUT", "DELETE"]
-}));
-
 mongoose.connect(MONGO_URI)
 .then(console.log('connesso a mongoDB'))
 .catch(error=>console.error(error))
+
 
 
 app.use('/booking' , bookingRoute)
