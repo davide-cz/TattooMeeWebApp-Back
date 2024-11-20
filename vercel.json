@@ -12,7 +12,7 @@
         },
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "https://il-tuo-frontend.vercel.app" 
+          "value": "https://tattoo-mee-web-app.vercel.app/" 
         },
         {
           "key": "Access-Control-Allow-Methods",
