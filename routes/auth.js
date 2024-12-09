@@ -109,7 +109,7 @@ router.post('/signup', async (req, res) => {
 
 
 router.post('/register-artist', async (req, res) => {
-  const { username,  password, description } = req.body;
+  const { username,  password, style } = req.body;
 
   try {
     // Verifica se l'username è già registrata
@@ -128,7 +128,8 @@ router.post('/register-artist', async (req, res) => {
     user = new User({
       username,
       password,
-      role: 'artist'
+      role: 'artist',
+      style
     });
     const salt = await bcrypt.genSalt(10);  // Maggiore è il numero, maggiore è la complessità (e la sicurezza)
     // Salva il tatuatore nel databaseconst salt = await bcrypt.genSalt(10);  // Maggiore è il numero, maggiore è la complessità (e la sicurezza)
