@@ -32,7 +32,7 @@ const strongPasswordOptions = {
 
 
 
-router.post('/logIn'  , async  (req,res)=>{
+router.post('/login'  , async  (req,res)=>{
   const { username ,  password}  = req.body;
   try {
     let user = await User.findOne({username});
