@@ -10,7 +10,6 @@ const userSchema = new Schema({
   password: {
     type:String,
     required:true,
-    unique:true
   },
   role: { type: String, enum: ['client', 'artist', 'admin'], default: 'client' },
   style :String
