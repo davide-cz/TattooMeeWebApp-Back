@@ -176,7 +176,7 @@ router.get('/tattooer', async (req, res) => {
     const {id} = req.params;
   
   try { 
-    const bookingByArtist = await  Booking.find({ tattooArtistId:id })
+    const bookingByArtist = await Booking.find({ tattooArtistId:id })
     
     if (bookingByArtist.length === 0) {
       return res.status(200).json({ message: 'Nessuna prenotazione trovata per questo artista' });

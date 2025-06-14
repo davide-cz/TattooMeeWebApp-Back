@@ -4,7 +4,7 @@ const bookingSchema = new Schema({/*
   tattooArtistId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   date: {
     type:Date,
-
+    default: Date.now
     },
   time: String,
   userNumber:String,
