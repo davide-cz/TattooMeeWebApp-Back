@@ -17,7 +17,7 @@ app.use(cors({
     origin: ['http://localhost:5173', 'https://tattoo-mee-web-app.vercel.app'], // Consenti il frontend locale e deployato
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], // Metodi HTTP consentiti
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+    credentials: true// aggiunto con credential
 }));
 
 app.use(morgan('dev'));
