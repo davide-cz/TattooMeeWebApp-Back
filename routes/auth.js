@@ -171,6 +171,91 @@ router.get('/tattooer', async (req, res) => {
     }
   });
 
+// Trova gli utenti con ruolo "piercer"
+
+
+router.get('/piercer', async (req, res) => {
+    try {
+      // Trova tutti gli utenti con ruolo "artist"
+      const piercers = await User.find({ role: 'piercer' });
+  
+      // Se non ci sono tatuatori
+      if (!piercers || piercers.length === 0) {
+        return res.status(404).json({ message: 'Nessun piercer trovato' });
+      }
+  
+      res.status(200).json(piercers);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send('Errore del server');
+    }
+  });
+
+
+// Rotta per registrare un piercer
+
+
+router.post('/register-piercer', async (req, res) => {
+  const { username,  password } = req.body;
+
+  try {
+    // Verifica se l'username è già registrata
+    let user = await User.findOne({ username });
+    if (!username) {
+      return res.status(400).json({ message: 'username non valido' });
+    }
+    if (user) {
+      return res.status(400).json({ message: 'username già registrato' });
+    }
+    if(!isStrongPassword(password, strongPasswordOptions)){
+      return res.status(400).json({ message:'la password deve contenere 8 caratteri, 1 simbolo, 1 numero e una maiuscola'})
+    }
+
+    // Crea un nuovo tatuatore con il ruolo "artist"
+    user = new User({
+      username,
+      password,
+      role: 'piercer'
+    });
+    const salt = await bcrypt.genSalt(10);  // Maggiore è il numero, maggiore è la complessità (e la sicurezza)
+    // Salva il tatuatore nel databaseconst salt = await bcrypt.genSalt(10);  // Maggiore è il numero, maggiore è la complessità (e la sicurezza)
+    user.password = await bcrypt.hash(password, salt);
+
+    // Salva l'utente nel database
+    await user.save();
+
+    // Genera un token JWT
+    const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '3d' });
+
+    // Invia il token come cookie o nel body della risposta
+    res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'Strict' });  // Usa solo con HTTPS
+    res.status(201).json({ message: 'Registrazione completata', token });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Errore del server');
+  }
+});
+
+// Trova gli utenti con ruolo "piercer"
+
+
+router.get('/piercer', async (req, res) => {
+    try {
+      // Trova tutti gli utenti con ruolo "artist"
+      const piercers = await User.find({ role: 'piercer' });
+  
+      // Se non ci sono tatuatori
+      if (!piercers || piercers.length === 0) {
+        return res.status(404).json({ message: 'Nessun piercer trovato' });
+      }
+  
+      res.status(200).json(piercers);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send('Errore del server');
+    }
+  });
+
   //------------------ trova booking con da artist ID  
   router.get('/:id' , async (req,res)=>{
     const {id} = req.params;

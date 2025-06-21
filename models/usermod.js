@@ -11,7 +11,7 @@ const userSchema = new Schema({
     type:String,
     required:true,
   },
-  role: { type: String, enum: ['client', 'artist', 'admin'], default: 'client' },
+  role: { type: String, enum: ['piercer', 'artist', 'admin'], default: 'client' },
   style :String
 });
 
